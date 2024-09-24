@@ -2,7 +2,7 @@ package com.serverInfo.dto
 
 import java.sql.Timestamp
 
-class ServerInfo implements Serializable {
+class ServerInfo {
 
     private int id;
     private int serverType;

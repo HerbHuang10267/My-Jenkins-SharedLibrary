@@ -6,7 +6,7 @@ package com.serverInfo.dao
 import groovy.sql.Sql
 import com.serverInfo.dto.ServerInfo
 
-class ServerInfoDAO implements Serializable{
+class ServerInfoDAO {
 
     static List<ServerInfo> findServerInfo(String sql) {
         // def dbPath = 'C:/Users/SAHerbHuangT14/initial-db.sqlite'
