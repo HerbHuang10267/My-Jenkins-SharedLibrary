@@ -10,6 +10,7 @@ class ServerInfoDAO {
     static List<ServerInfo> findServerInfo(String sql) {
         // def dbPath = 'C:/Users/SAHerbHuangT14/initial-db.sqlite'
         def dbPath = '/var/jenkins_home/sqlite_data/initial-db.sqlite'
+    def findServerInfo(String sql) {
         def url = "jdbc:sqlite:$dbPath"
         def sqlInstance = Sql.newInstance(url, "org.sqlite.JDBC")
 
@@ -34,11 +35,4 @@ class ServerInfoDAO {
         return serverInfoList
     }
 
-    static void main(String[] args) {
-        List<ServerInfo> serverInfoList = findServerInfo('SELECT * FROM serverinfo')
-        println "==============="
-        for (ServerInfo serverInfo : serverInfoList) {
-            println serverInfo.toString()
-        }
-    }
 }
