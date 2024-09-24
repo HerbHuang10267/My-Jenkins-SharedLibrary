@@ -1,0 +1,27 @@
+# version: "3.8"
+
+services:
+  sqlite:
+    image: my-sqlite:latest
+    container_name: my-sqlite
+    volumes:
+      - "sqlite_data:/data"
+
+  sqlitebrowser:
+    image: linuxserver/sqlitebrowser
+    ports:
+      - "3000:3000"
+    depends_on:
+      - sqlite
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=UTC
+      - ENABLE_UWSGI=true
+    volumes:
+      - "sqlite_data:/data"
+    container_name: sqlitebrowser
+
+volumes:
+  sqlite_data:
+    external: true
