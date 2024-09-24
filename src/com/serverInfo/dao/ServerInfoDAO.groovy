@@ -3,7 +3,7 @@ package com.serverInfo.dao
 
 @Grab(group='org.xerial', module='sqlite-jdbc', version='3.36.0.3')
 import groovy.sql.Sql
-import com.serverInfo.dto.ServerInfo
+import com.serverInfo.dto.*
 
 class ServerInfoDAO {
 
