@@ -1,10 +1,12 @@
 package com.serverInfo.dao
 
-//@Grab(group='org.xerial', module='sqlite-jdbc', version='3.36.0.3')
+@Grapes(
+    @Grab(group='org.xerial', module='sqlite-jdbc', version='3.46.1.0')
+)
 import groovy.sql.Sql
 import com.serverInfo.dto.ServerInfo
 
-class ServerInfoDAO {
+class ServerInfoDAO implements Serializable{
 
     static List<ServerInfo> findServerInfo(String sql) {
         // def dbPath = 'C:/Users/SAHerbHuangT14/initial-db.sqlite'
