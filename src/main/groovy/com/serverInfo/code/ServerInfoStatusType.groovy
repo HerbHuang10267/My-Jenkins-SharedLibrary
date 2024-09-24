@@ -1,4 +1,4 @@
-package serverInfo.code
+package com.serverInfo.code
 
 enum ServerInfoStatusType {
 

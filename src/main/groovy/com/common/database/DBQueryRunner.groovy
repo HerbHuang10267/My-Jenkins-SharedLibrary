@@ -1,6 +1,4 @@
-package common.database
-
-import groovy.sql.Sql
+package com.common.database
 
 class DBQueryRunner {
     // TODO

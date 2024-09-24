@@ -1,4 +1,4 @@
-package serverInfo.dto
+package com.serverInfo.dto
 
 import java.sql.Timestamp
 

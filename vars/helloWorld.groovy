@@ -1,3 +1,7 @@
+#!/usr/bin/groovy
+import com.serverInfo.dao.ServerInfoDAO
+
 def call() {
-  echo "Hello World! My first Shared Library"
+    ServerInfoDAO.findServerInfo('SELECT * FROM serverinfo')
+    echo "Hello World! My first Shared Library"
 }
