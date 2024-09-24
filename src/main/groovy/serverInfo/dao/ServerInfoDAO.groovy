@@ -6,7 +6,8 @@ import serverInfo.dto.ServerInfo
 class ServerInfoDAO {
 
     static List<ServerInfo> findServerInfo(String sql) {
-        def dbPath = 'C:/Users/SAHerbHuangT14/initial-db.sqlite'
+        // def dbPath = 'C:/Users/SAHerbHuangT14/initial-db.sqlite'
+        def dbPath = '/var/jenkins_home/sqlite_data/initial-db.sqlite'
         def url = "jdbc:sqlite:$dbPath"
         def sqlInstance = Sql.newInstance(url, "org.sqlite.JDBC")
 
