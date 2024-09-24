@@ -5,6 +5,8 @@ RUN apk --no-cache add sqlite
 WORKDIR /db
 # Copy your SQLite database file into the container
 COPY initial-db.sqlite /db/
+RUN chown -R 1000:1000 /data
+#RUN chmod 777 /data/initial-db.sqlite
 # Expose the port if needed
 # EXPOSE 1433
 # Command to run when the container starts
