@@ -9,6 +9,6 @@ def call() {
     body()
 
     echo "Hello World! My first Shared Library"
-    ServerInfoDAO serverInfoDAO = ServerInfoDAO()
+    ServerInfoDAO serverInfoDAO = new com.serverInfo.dao.ServerInfoDAO()
     List<ServerInfo> serverInfoList = serverInfoDAO.findServerInfo('SELECT * FROM serverinfo')
 }
