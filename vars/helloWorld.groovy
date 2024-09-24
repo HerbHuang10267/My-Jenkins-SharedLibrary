@@ -1,4 +1,5 @@
 import com.serverInfo.dto.ServerInfo
+import com.serverInfo.dao.ServerInfoDAO
 
 def call() {
 
@@ -8,6 +9,6 @@ def call() {
     body()
 
     echo "Hello World! My first Shared Library"
-    ServerInfoDAO serverInfoDAO = new com.serverInfo.dao.ServerInfoDAO()
+    ServerInfoDAO serverInfoDAO = ServerInfoDAO()
     List<ServerInfo> serverInfoList = serverInfoDAO.findServerInfo('SELECT * FROM serverinfo')
 }
