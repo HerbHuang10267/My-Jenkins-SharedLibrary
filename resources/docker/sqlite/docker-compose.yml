@@ -6,6 +6,8 @@ services:
     container_name: my-sqlite
     volumes:
       - "sqlite_data:/data"
+    environment:
+      - TZ=Asia/Taipei
 
   sqlitebrowser:
     image: linuxserver/sqlitebrowser
@@ -16,7 +18,7 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=UTC
+      - TZ=Asia/Taipei
       - ENABLE_UWSGI=true
     volumes:
       - "sqlite_data:/data"
