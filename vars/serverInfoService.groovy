@@ -23,7 +23,6 @@ def parseServerInfo(String data) {
     def lines = data.readLines().drop(2)
     lines.each { line ->
         def fields = line.split(/\|/, -1) // 使用 | 分隔資料
-        println fields
         if (fields.size() >= 7) {
             println fields[0]
             println fields[1]
