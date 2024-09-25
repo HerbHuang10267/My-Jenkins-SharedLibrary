@@ -38,9 +38,9 @@ def parseServerInfo(String data) {
                     name: fields[1],                 // server 名稱
                     ip: fields[2],                   // ip
                     port: fields[3] as int,          // port
-                    servertype: fields[4] as int,    // server type
+                    serverType: fields[4] as int,    // server type
                     status: fields[5] as int,        // 狀態
-                    updatedate: fields[6]            // 更新日期
+                    updateDate: fields[6]            // 更新日期
             )
             serverInfoList.add(serverInfo)
         }
