@@ -1,0 +1,123 @@
+@Library('My-Jenkins-SharedLibrary@dev')_
+
+def Modules = [:]
+
+pipeline {
+    agent any
+//     parameters {
+//         string(name: 'Name', defaultValue: 'demo', description: '')
+//         choice(name: 'VERSION', choices: ['1.1.0', '1.2.0', '1.3.0'], description: '')
+//         booleanParam(name: 'executeTests', defaultValue: true, description: '')
+//     }
+    stages {
+        stage("init") {
+            steps {
+                script {
+                    sh 'pwd'
+
+                    // Load the Groovy file from an absolute path
+                    Modules.ServerInfo = load '/var/jenkins_home/serverInfo/ServerInfo.groovy'
+                    // helloWorld()
+                    // 加载 Groovy 类
+                    // def myClass = new com.serverInfo.dao.ServerInfoDAO()
+
+                    // myClass.findServerInfo('SELECT * FROM serverinfo')
+                }
+            }
+        }
+        stage("update server info") {
+            steps {
+                script {
+                    def serverTypeMap = [:]
+
+                    def myPlayerListMap = Modules.ServerInfo.getActiveServerInfoMapByServerType('myPlayerList', myPlayerList)
+                    echo "$myPlayerListMap"
+                    serverTypeMap.put("myPlayerList", myPlayerListMap)
+
+                    def myAgentListMap = Modules.ServerInfo.getActiveServerInfoMapByServerType('myAgentList', myAgentList)
+                    echo "$myAgentListMap"
+                    serverTypeMap.put("myAgentList", myAgentListMap)
+
+                    def myOpListMap = Modules.ServerInfo.getActiveServerInfoMapByServerType('myOpList', myOpList)
+                    echo "$myOpListMap"
+                    serverTypeMap.put("myOpList", myOpListMap)
+
+                    def myApiListMap = Modules.ServerInfo.getActiveServerInfoMapByServerType('myApiList', myApiList)
+                    echo "$myApiListMap"
+                    serverTypeMap.put("myApiList", myApiListMap)
+
+                    def mySbApiListMap = Modules.ServerInfo.getActiveServerInfoMapByServerType('mySbApiList', mySbApiList)
+                    echo "$mySbApiListMap"
+                    serverTypeMap.put("mySbApiList", mySbApiListMap)
+
+                    def myTxnListMap = Modules.ServerInfo.getActiveServerInfoMapByServerType('myTxnList', myTxnList)
+                    echo "$myTxnListMap"
+                    serverTypeMap.put("myTxnList", myTxnListMap)
+
+                    def myBfResultListMap = Modules.ServerInfo.getActiveServerInfoMapByServerType('myBfResultList', myBfResultList)
+                    echo "$myBfResultListMap"
+                    serverTypeMap.put("myBfResultList", myBfResultListMap)
+
+                    def mySbResultListMap = Modules.ServerInfo.getActiveServerInfoMapByServerType('mySbResultList', mySbResultList)
+                    echo "$mySbResultListMap"
+                    serverTypeMap.put("mySbResultList", mySbResultListMap)
+
+                    def myVendorResultListMap = Modules.ServerInfo.getActiveServerInfoMapByServerType('myVendorResultList', myVendorResultList)
+                    echo "$myVendorResultListMap"
+                    serverTypeMap.put("myVendorResultList", myVendorResultListMap)
+
+                    def myCacheListMap = Modules.ServerInfo.getActiveServerInfoMapByServerType('myCacheList', myCacheList)
+                    echo "$myCacheListMap"
+                    serverTypeMap.put("myCacheList", myCacheListMap)
+
+                    def myElkListMap = Modules.ServerInfo.getActiveServerInfoMapByServerType('myElkList', myElkList)
+                    echo "$myElkListMap"
+                    serverTypeMap.put("myElkList", myElkListMap)
+
+                    def myApiProviderListMap = Modules.ServerInfo.getActiveServerInfoMapByServerType('myApiProviderList', myApiProviderList)
+                    echo "$myApiProviderListMap"
+                    serverTypeMap.put("myApiProviderList", myApiProviderListMap)
+
+                    def myExposureListMap = Modules.ServerInfo.getActiveServerInfoMapByServerType('myExposureList', myExposureList)
+                    echo "$myExposureListMap"
+                    serverTypeMap.put("myExposureList", myExposureListMap)
+
+                    def myPlayerTxnListMap = Modules.ServerInfo.getActiveServerInfoMapByServerType('myPlayerTxnList', myPlayerTxnList)
+                    echo "$myPlayerTxnListMap"
+                    serverTypeMap.put("myPlayerTxnList", myPlayerTxnListMap)
+
+                    def myFbBettingListMap = Modules.ServerInfo.getActiveServerInfoMapByServerType('myFbBettingList', myFbBettingList)
+                    echo "$myFbBettingListMap"
+                    serverTypeMap.put("myFbBettingList", myFbBettingListMap)
+
+                    Modules.ServerInfo.updateJsonFileByServerTypeMap(serverTypeMap)
+                }
+            }
+        }
+        stage("test") {
+            when {
+                expression {
+                    params.executeTests
+                }
+            }
+            steps {
+
+                // script {
+                //     gv.testApp()
+                // }
+                echo 'test'
+            }
+
+        }
+        stage("deploy") {
+            steps {
+                // script {
+                //     gv.deployApp()
+                // }
+
+                echo 'deploy'
+            }
+
+        }
+    }
+}
