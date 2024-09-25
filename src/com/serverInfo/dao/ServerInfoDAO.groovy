@@ -20,9 +20,11 @@ class ServerInfoDAO implements Serializable {
         def dbPath = '/var/jenkins_home/sqlite_data/initial-db.sqlite'
         script.println(dbPath)
         def url = "jdbc:sqlite:$dbPath"
-        def sqlInstance = Sql.newInstance(url, "org.sqlite.JDBC")
-
+        script.println(url)
+        def sqlInstance = script.Sql.newInstance(url, "org.sqlite.JDBC")
+        script.println(sqlInstance)
         List<ServerInfo> serverInfoList = new ArrayList<>();
+        script.println(serverInfoList)
         sqlInstance.eachRow(sql) { row ->
             ServerInfo serverInfo = new ServerInfo()
 
