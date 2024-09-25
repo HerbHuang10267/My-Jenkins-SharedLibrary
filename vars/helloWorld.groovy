@@ -7,6 +7,5 @@ def test1() {
 
 def test2() {
     println("Hello World! test2 ")
-    ServerInfoDAO serverInfoDAO = new ServerInfoDAO()
-    List<ServerInfo> serverInfoList = serverInfoDAO.findServerInfo('SELECT * FROM serverinfo')
+    List<ServerInfo> serverInfoList = ServerInfoDAO.findServerInfo('SELECT * FROM serverinfo')
 }
