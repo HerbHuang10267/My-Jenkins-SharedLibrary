@@ -8,7 +8,7 @@ import com.serverInfo.dto.ServerInfo
 
 class ServerInfoDAO {
 
-    def findServerInfo(String sql) {
+    def static findServerInfo(String sql) {
 //        def dbPath = 'C:/Users/SAHerbHuangT14/initial-db.sqlite'
 //        // def dbPath = '/var/jenkins_home/sqlite_data/initial-db.sqlite'
 //        def url = "jdbc:sqlite:$dbPath"
