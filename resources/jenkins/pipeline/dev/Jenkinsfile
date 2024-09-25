@@ -18,8 +18,10 @@ pipeline {
 
                     // Load the Groovy file from an absolute path
                     Modules.ServerInfo = load '/var/jenkins_home/serverInfo/ServerInfo.groovy'
-					Modules.ServerInfoDAO = load '${env.WORKSPACE}src/com/serverInfo/dao/ServerInfoDAO.groovy'
-                    def serverInfoList = Modules.ServerInfoDAO.findServerInfo('SELECT * FROM serverinfo')
+
+                    def serverInfoList = library('My-Jenkins-SharedLibrary@dev').com.serverInfo.dao.ServerInfoDAO.findServerInfo()
+// 					Modules.ServerInfoDAO = load '${env.WORKSPACE}src/com/serverInfo/dao/ServerInfoDAO.groovy'
+//                     def serverInfoList = Modules.ServerInfoDAO.findServerInfo('SELECT * FROM serverinfo')
                     // helloWorld()
                     // 加载 Groovy 类
                     // def myClass = new com.serverInfo.dao.ServerInfoDAO()
