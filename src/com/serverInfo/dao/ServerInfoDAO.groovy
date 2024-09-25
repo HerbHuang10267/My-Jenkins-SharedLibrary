@@ -15,6 +15,7 @@ class ServerInfoDAO implements Serializable {
     }
 
     def findServerInfo(String sql) {
+        script.println("do findServerInfo")
 //        def dbPath = 'C:/Users/SAHerbHuangT14/initial-db.sqlite'
 //        // def dbPath = '/var/jenkins_home/sqlite_data/initial-db.sqlite'
 //        def url = "jdbc:sqlite:$dbPath"
@@ -39,7 +40,7 @@ class ServerInfoDAO implements Serializable {
 //
 //        sqlInstance.close()
 //        return serverInfoList
-        println(sql)
+        script.println(sql)
         return null
     }
 
