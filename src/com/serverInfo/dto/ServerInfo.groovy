@@ -4,7 +4,8 @@ class ServerInfo {
 
     int id;
     int serverType;
-    String name;
+    String serverTypeName;
+    String hostName;
     String port;
     String ip;
     int status;
@@ -15,11 +16,12 @@ class ServerInfo {
         return "ServerInfo{" +
                 "id=" + id +
                 ", serverType=" + serverType +
-                ", name='" + name + '\'' +
+                ", serverTypeName='" + serverTypeName + '\'' +
+                ", hostName='" + hostName + '\'' +
                 ", port='" + port + '\'' +
                 ", ip='" + ip + '\'' +
                 ", status=" + status +
-                ", updateDate=" + updateDate +
+                ", updateDate='" + updateDate + '\'' +
                 '}';
     }
 }

@@ -1,7 +1,7 @@
 @Grapes(
         @Grab(group='org.xerial', module='sqlite-jdbc', version='3.8.9.1')
 )
-
+import com.serverInfo.dto.ServerInfo
 static void main(String[] args) {
 //    List<ServerInfo> serverInfoList =  new com.serverInfo.dao.ServerInfoDAO().findServerInfo('SELECT * FROM serverinfo')
 //    println "==============="
@@ -43,13 +43,15 @@ static void main(String[] args) {
 }
 
 class ServerInfo {
-    int id
-    String name
-    String ip
-    int port
-    int servertype
-    int status
-    String updatedate
+
+    int id;
+    int serverType;
+    String serverTypeName;
+    String hostName;
+    String port;
+    String ip;
+    int status;
+    String updateDate;
 
 //    // 定义一个普通的构造函数
 //    ServerInfo(int id, String name, String ip, int port, int servertype, int status, String updatedate) {
@@ -61,16 +63,6 @@ class ServerInfo {
 //        this.status = status
 //        this.updatedate = updatedate
 //    }
-    // 显式定义一个构造函数以支持 map-style 参数
-    ServerInfo(Map params) {
-        this.id = params.id
-        this.name = params.name
-        this.ip = params.ip
-        this.port = params.port
-        this.servertype = params.servertype
-        this.status = params.status
-        this.updatedate = params.updatedate
-    }
 }
 
 def parseServerInfo(String data) {

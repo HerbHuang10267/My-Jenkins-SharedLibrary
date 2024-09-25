@@ -1,8 +1,9 @@
 #!/usr/bin/env groovy
 import com.serverInfo.dto.ServerInfo
 
-def executeSQL(String sql) {
-    def dbPath = '/var/jenkins_home/sqlite_data/initial-db.sqlite'
+def executeSQL(Map config = [:]) {
+    def dbPath = getDataBasePath(config.project)
+    def sql = config.sql
     try {
         String result = sh(script: "sqlite3 ${dbPath} \".headers ON\" \"${sql}\"", returnStdout: true)
         return parseServerInfo(result)
@@ -10,6 +11,19 @@ def executeSQL(String sql) {
         println("SQLite excute SQL failed: ${e.getMessage()} ")
     }
     return null
+}
+
+def getDataBasePath(String project) {
+    switch (project) {
+        case "9w":
+            return '/var/jenkins_home/sqlite_data/9w-db.sqlite'
+        case "vk":
+            return '/var/jenkins_home/sqlite_data/vk-db.sqlite'
+        case "mini":
+            return '/var/jenkins_home/sqlite_data/mini-db.sqlite'
+        default:
+            return null
+    }
 }
 
 def parseServerInfo(String data) {
@@ -23,23 +37,17 @@ def parseServerInfo(String data) {
     def lines = data.readLines().drop(2)
     lines.each { line ->
         def fields = line.split(/\|/, -1) // 使用 | 分隔資料
-        if (fields.size() >= 7) {
-            println fields[0]
-            println fields[1]
-            println fields[2]
-            println fields[3]
-            println fields[4]
-            println fields[5]
-            println fields[6]
-            // id|name|ip|port|servertype|status|updatedate
+        if (fields.size() >= 8) {
+            // id|hostname|ip|port|servertype|servertypename|status|updatedate
             def serverInfo = new ServerInfo (
                     id: fields[0] as int,            // id
-                    name: fields[1],                 // server 名稱
+                    hostName: fields[1],             // server 名稱
                     ip: fields[2],                   // ip
                     port: fields[3] as int,          // port
                     serverType: fields[4] as int,    // server type
-                    status: fields[5] as int,        // 狀態
-                    updateDate: fields[6]            // 更新日期
+                    serverTypeName: fields[5],       // server type name
+                    status: fields[6] as int,        // 狀態
+                    updateDate: fields[7]            // 更新日期
             )
             serverInfoList.add(serverInfo)
         }
