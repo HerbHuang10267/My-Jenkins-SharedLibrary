@@ -1,3 +1,4 @@
+#!/usr/bin/env groovy
 import com.serverInfo.dto.ServerInfo
 import com.serverInfo.dao.ServerInfoDAO
 
@@ -7,5 +8,6 @@ def test1() {
 
 def test2() {
     println("Hello World! test2 ")
-    List<ServerInfo> serverInfoList = ServerInfoDAO.findServerInfo('SELECT * FROM serverinfo')
+    ServerInfoDAO serverInfoDAO = new ServerInfoDAO(this)
+    List<ServerInfo> serverInfoList = serverInfoDAO.findServerInfo('SELECT * FROM serverinfo')
 }

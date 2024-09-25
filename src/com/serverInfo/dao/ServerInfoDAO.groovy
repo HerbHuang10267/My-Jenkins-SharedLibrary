@@ -6,9 +6,15 @@ package com.serverInfo.dao
 import groovy.sql.Sql
 import com.serverInfo.dto.ServerInfo
 
-class ServerInfoDAO {
+class ServerInfoDAO implements Serializable {
 
-    def static findServerInfo(String sql) {
+    def script
+
+    ServerInfoDAO(script) {
+        this.script=script
+    }
+
+    def findServerInfo(String sql) {
 //        def dbPath = 'C:/Users/SAHerbHuangT14/initial-db.sqlite'
 //        // def dbPath = '/var/jenkins_home/sqlite_data/initial-db.sqlite'
 //        def url = "jdbc:sqlite:$dbPath"
