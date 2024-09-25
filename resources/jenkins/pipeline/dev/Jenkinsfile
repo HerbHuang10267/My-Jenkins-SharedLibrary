@@ -13,12 +13,13 @@ pipeline {
         stage("init") {
             steps {
                 script {
+                	echo "Running ${env.BUILD_URL}"
                     sh 'pwd'
 
                     // Load the Groovy file from an absolute path
                     Modules.ServerInfo = load '/var/jenkins_home/serverInfo/ServerInfo.groovy'
-
-                    def serverInfoList = library('My-Jenkins-SharedLibrary@dev').com.serverInfo.dao.ServerInfoDAO()
+					Modules.ServerInfoDAO = load '${env.BUILD_URL}src/com/serverInfo/dao/ServerInfoDAO.groovy'
+                    def serverInfoList = Modules.ServerInfoDAO.findServerInfo('SELECT * FROM serverinfo')
                     // helloWorld()
                     // 加载 Groovy 类
                     // def myClass = new com.serverInfo.dao.ServerInfoDAO()
