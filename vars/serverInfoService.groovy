@@ -4,8 +4,8 @@ import com.serverInfo.dto.ServerInfo
 def executeSQL(String sql) {
     def dbPath = '/var/jenkins_home/sqlite_data/initial-db.sqlite'
     try {
-        def result = sh(script: "sqlite3 ${dbPath} \".headers ON\" \"${sql}\"", returnStdout: true)
-        return result
+        String result = sh(script: "sqlite3 ${dbPath} \".headers ON\" \"${sql}\"", returnStdout: true)
+        return parseServerInfo(result)
     } catch (Exception e) {
         println("SQLite excute SQL failed: ${e.getMessage()} ")
     }
