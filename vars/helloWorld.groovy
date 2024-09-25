@@ -1,14 +1,12 @@
 import com.serverInfo.dto.ServerInfo
 import com.serverInfo.dao.ServerInfoDAO
 
-def call() {
+def test1() {
+    println("Hello World! test1 ")
+}
 
-    def pipelineParams= [:]
-    body.resolveStrategy = Closure.DELEGATE_FIRST
-    body.delegate = pipelineParams
-    body()
-
-    echo "Hello World! My first Shared Library"
-    ServerInfoDAO serverInfoDAO = new com.serverInfo.dao.ServerInfoDAO()
+def test2() {
+    println("Hello World! test2 ")
+    ServerInfoDAO serverInfoDAO = new ServerInfoDAO()
     List<ServerInfo> serverInfoList = serverInfoDAO.findServerInfo('SELECT * FROM serverinfo')
 }
