@@ -7,7 +7,7 @@ static void main(String[] args) {
     def serverInfoList = data
 
     serverInfoList.each { server ->
-        println "ID: ${server.id}, Name: ${server.name}, IP: ${server.ip}, Port: ${server.port}, serverType: ${server.serverType}, Status: ${server.status}, UpdateDate: ${server.UpdateDate}"
+        println "ID: ${server.id}, Name: ${server.name}, IP: ${server.ip}, Port: ${server.port}, serverType: ${server.serverType}, Status: ${server.status}, updateDate: ${server.updateDate}"
     }
 }
 
@@ -17,24 +17,24 @@ def executeSQL(String sql) {
 //        def result = sh(script: "sqlite3 ${dbPath} \".headers ON\" \"${sql}\"", returnStdout: true)
         def result = '''
         id|name|ip|port|servertype|status|updatedate
-        1|Player Server|10.100.10.14|80|7|0|
-        2|Betfair Api Server|10.100.10.15|8888|32|0|
-        3|Betfair Result Server|10.100.10.15|9099|8|0|
-        4|Transaction Server|10.100.10.15|9090|16|0|
-        5|Sportradar Api Server|10.100.10.19|8888|32|0|
-        6|Sportradar Result Server|10.100.10.19|9099|8|0|
-        7|TS Api Server|10.100.10.23|8888|32|1|
-        8|Cache Server|10.100.10.23|9090|2048|0|
-        9|Vendor Result Server|10.100.10.21|9099|8|0|
-        10|Player Server|10.100.10.193|80|1|0|
-        11|Exposure Server01|10.100.10.24|8085|4096|0|
-        12|Exposure Server02|10.100.10.25|8085|4096|1|
-        13|Api Provider Server01|10.100.10.26|8084|8192|0|
-        14|Api Provider Server02|10.100.10.27|8084|8192|0|
-        15|Elk Server01|10.100.10.28|9098|16384|0|
-        16|Exposure Server Local|10.10.56.38|8081|4096|1|
-        17|Transaction Server - Player Txn|10.100.10.29|9090|16|0|
-        18|Betting server|10.100.10.225|8088|64|0|
+        1|Player Server|10.100.10.14|80|7|0|2024-09-25
+        2|Betfair Api Server|10.100.10.15|8888|32|0|2024-09-25
+        3|Betfair Result Server|10.100.10.15|9099|8|0|2024-09-25
+        4|Transaction Server|10.100.10.15|9090|16|0|2024-09-25
+        5|Sportradar Api Server|10.100.10.19|8888|32|0|2024-09-25
+        6|Sportradar Result Server|10.100.10.19|9099|8|0|2024-09-25
+        7|TS Api Server|10.100.10.23|8888|32|1|2024-09-25
+        8|Cache Server|10.100.10.23|9090|2048|0|2024-09-25
+        9|Vendor Result Server|10.100.10.21|9099|8|0|2024-09-25
+        10|Player Server|10.100.10.193|80|1|0|2024-09-25
+        11|Exposure Server01|10.100.10.24|8085|4096|0|2024-09-25
+        12|Exposure Server02|10.100.10.25|8085|4096|1|2024-09-25
+        13|Api Provider Server01|10.100.10.26|8084|8192|0|2024-09-25
+        14|Api Provider Server02|10.100.10.27|8084|8192|0|2024-09-25
+        15|Elk Server01|10.100.10.28|9098|16384|0|2024-09-25
+        16|Exposure Server Local|10.10.56.38|8081|4096|1|2024-09-25
+        17|Transaction Server - Player Txn|10.100.10.29|9090|16|0|2024-09-25
+        18|Betting server|10.100.10.225|8088|64|0|2024-09-25
         '''
         return parseServerInfo(result)
     } catch (Exception e) {
@@ -49,7 +49,7 @@ def parseServerInfo(def data) {
         return null
     }
 
-    List<ServerInfo> serverInfoList = new ArrayList()
+    def serverInfoList = []
     // 去除 header 及分隔線
     def lines = data.readLines().drop(2)
     lines.each { line ->

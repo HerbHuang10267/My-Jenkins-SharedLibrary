@@ -3,8 +3,8 @@ def test1() {
     println("Hello World! test1 ")
 }
 
-def callOtherMethod() {
+def callOtherMethod(def sql) {
     println("Hello World! test2 ")
-    def result = serverInfoService.executeSQL("SELECT * FROM serverinfo")
-    println(result)
+    def result = serverInfoService.executeSQL(sql)
+    return result
 }
