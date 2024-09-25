@@ -17,6 +17,8 @@ pipeline {
 
                     // Load the Groovy file from an absolute path
                     Modules.ServerInfo = load '/var/jenkins_home/serverInfo/ServerInfo.groovy'
+
+                    def serverInfoList = library('My-Jenkins-SharedLibrary@dev').com.serverInfo.dao.ServerInfoDAO()
                     // helloWorld()
                     // 加载 Groovy 类
                     // def myClass = new com.serverInfo.dao.ServerInfoDAO()

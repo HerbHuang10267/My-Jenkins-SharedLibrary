@@ -1,7 +1,7 @@
 package com.serverInfo.dao
 
 @Grapes(
-    @Grab(group='org.xerial', module='sqlite-jdbc', version='3.46.1.0')
+    @Grab(group='org.xerial', module='sqlite-jdbc', version='3.8.9.1')
 )
 import groovy.sql.Sql
 import com.serverInfo.dto.ServerInfo
