@@ -1,14 +1,7 @@
-@Grapes(
-        @Grab(group='org.xerial', module='sqlite-jdbc', version='3.8.9.1')
-)
+package test
+import com.serverInfo.dto.ServerInfo
 
 static void main(String[] args) {
-//    List<ServerInfo> serverInfoList =  new com.serverInfo.dao.ServerInfoDAO().findServerInfo('SELECT * FROM serverinfo')
-//    println "==============="
-//    for (ServerInfo serverInfo : serverInfoList) {
-//        println serverInfo.toString()
-//    }
-
 
     // 原始数据字符串
     def data = '''
@@ -33,43 +26,10 @@ static void main(String[] args) {
     18|Betting server|10.100.10.225|8088|64|0|
     '''
 
-    // 调用函数，将数据解析为 List<ServerInfo>
     def serverInfoList = parseServerInfo(data)
-    println serverInfoList.size()
-// 打印结果，验证是否正确
+
     serverInfoList.each { server ->
-        println "ID: ${server.id}, Name: ${server.name}, IP: ${server.ip}, Port: ${server.port}, Type: ${server.servertype}, Status: ${server.status}, Updatedate: ${server.updatedate}"
-    }
-}
-
-class ServerInfo {
-    int id
-    String name
-    String ip
-    int port
-    int servertype
-    int status
-    String updatedate
-
-//    // 定义一个普通的构造函数
-//    ServerInfo(int id, String name, String ip, int port, int servertype, int status, String updatedate) {
-//        this.id = id
-//        this.name = name
-//        this.ip = ip
-//        this.port = port
-//        this.servertype = servertype
-//        this.status = status
-//        this.updatedate = updatedate
-//    }
-    // 显式定义一个构造函数以支持 map-style 参数
-    ServerInfo(Map params) {
-        this.id = params.id
-        this.name = params.name
-        this.ip = params.ip
-        this.port = params.port
-        this.servertype = params.servertype
-        this.status = params.status
-        this.updatedate = params.updatedate
+        println "ID: ${server.id}, Name: ${server.name}, IP: ${server.ip}, Port: ${server.port}, Type: ${server.serverType}, Status: ${server.status}, Updatedate: ${server.updatedate}"
     }
 }
 
@@ -97,15 +57,14 @@ def parseServerInfo(String data) {
                 id: fields[0] as int,            // 将 id 转换为整数
                 name: fields[1],                 // 名称
                 ip: fields[2],                   // IP 地址
-                port: fields[3] as int,          // 端口号
-                servertype: fields[4] as int,    // 服务器类型
+                port: fields[3],                 // 端口号
+                serverType: fields[4] as int,    // 服务器类型
                 status: fields[5] as int,        // 状态
-                updatedate: fields[6]            // 更新日期（如果为空则为 null）
+                updateDate: fields[6]            // 更新日期（如果为空则为 null）
             )
             println serverInfo.toString()
             // 添加到列表
             serverInfoList.add(serverInfo)
-            println serverInfoList.size()
         }
     }
     println serverInfoList.size()

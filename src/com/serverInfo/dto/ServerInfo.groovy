@@ -1,7 +1,5 @@
 package com.serverInfo.dto
 
-import java.sql.Timestamp
-
 class ServerInfo {
 
     private int id;
@@ -10,7 +8,7 @@ class ServerInfo {
     private String port;
     private String ip;
     private int status;
-    private Timestamp updateDate;
+    private String updateDate;
 
     int getId() {
         return id
@@ -60,16 +58,16 @@ class ServerInfo {
         this.status = status
     }
 
-    Timestamp getUpdateDate() {
+    String getUpdateDate() {
         return updateDate
     }
 
-    void setUpdateDate(Timestamp updateDate) {
+    void setUpdateDate(String updateDate) {
         this.updateDate = updateDate
     }
 
     @Override
-    public String toString() {
+    String toString() {
         return "ServerInfo{" +
                 "id=" + id +
                 ", serverType=" + serverType +
