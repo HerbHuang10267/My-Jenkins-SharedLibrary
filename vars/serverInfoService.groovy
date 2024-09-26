@@ -11,7 +11,7 @@ def executeSQL(Map config = [:]) {
         def sout = new StringBuilder(), serr = new StringBuilder()
         proc.consumeProcessOutput(sout, serr)
         proc.waitForOrKill(60 * 1000)
-        return parseServerInfo(sout)
+        return parseServerInfo(sout.toString())
     } catch (Exception e) {
         println("SQLite excute SQL failed: ${e.getMessage()} ")
     }

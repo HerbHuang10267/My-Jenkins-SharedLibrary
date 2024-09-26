@@ -16,6 +16,14 @@ def executeSQL(Map config = [:]) {
     def sql = config.sql
     try {
 //        def result = sh(script: "sqlite3 ${dbPath} \".headers ON\" \"${sql}\"", returnStdout: true)
+
+        def command = ["sqlite3", dbPath, ".headers on", sql]
+        def proc = command.execute()
+        def sout = new StringBuilder(), serr = new StringBuilder()
+        proc.consumeProcessOutput(sout, serr)
+        proc.waitForOrKill(60 * 1000)
+
+        println("sout: ${sout}")
         def result = '''
         id|hostname|ip|port|servertype|servertypename|status|updatedate
         1|Player Server|10.100.10.14|80|7|PLAYER/AGENT/MANAGER|0|2024-09-25 15:27:21
@@ -36,7 +44,7 @@ def executeSQL(Map config = [:]) {
         16|Transaction Server - Player Txn|10.100.10.29|9090|16|TRANSACTION_SERVER|0|2024-09-25 15:27:28
         17|Betting server|10.100.10.225|8088|64|BETTING_SERVER|0|2024-09-25 15:27:28
         '''
-        return parseServerInfo(result)
+        return parseServerInfo(sout.toString())
     } catch (Exception e) {
         println("SQLite excute SQL failed: ${e.getMessage()} ")
     }
