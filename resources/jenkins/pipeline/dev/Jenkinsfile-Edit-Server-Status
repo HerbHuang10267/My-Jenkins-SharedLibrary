@@ -1,0 +1,28 @@
+@Library('My-Jenkins-SharedLibrary@dev')_
+pipeline {
+    agent any
+//     parameters {
+//         string(name: 'Name', defaultValue: 'demo', description: '')
+//         choice(name: 'VERSION', choices: ['1.1.0', '1.2.0', '1.3.0'], description: '')
+//         booleanParam(name: 'executeTests', defaultValue: true, description: '')
+//     }
+    stages {
+        stage("init") {
+            steps {
+                script {
+                    sh 'env'
+                    sh 'dnf install sqlite -y'
+                }
+            }
+        }
+        stage("update server info") {
+            steps {
+                script {
+                    Map serverInfoMap = collectServerInfoByOption(Servers)
+                    println serverInfoMap
+                    serverInfoService.batchUpdateServerInfoStatus(project: "9w", serverInfoMap)
+                }
+            }
+        }
+    }
+}
