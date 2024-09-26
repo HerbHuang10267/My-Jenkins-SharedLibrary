@@ -2,11 +2,16 @@
 import com.serverInfo.dto.ServerInfo
 
 def executeSQL(Map config = [:]) {
-    def dbPath = getDataBasePath(config.project)
-    def sql = config.sql
+
     try {
-        String result = sh(script: "sqlite3 ${dbPath} \".headers ON\" \"${sql}\"", returnStdout: true)
-        return parseServerInfo(result)
+        def dbPath = getDataBasePath(config.project)
+        def sql = config.sql
+        def command = ["sqlite3", dbPath, ".headers on", sql]
+        def proc = command.execute()
+        def sout = new StringBuilder(), serr = new StringBuilder()
+        proc.consumeProcessOutput(sout, serr)
+        proc.waitForOrKill(60 * 1000)
+        return parseServerInfo(sout)
     } catch (Exception e) {
         println("SQLite excute SQL failed: ${e.getMessage()} ")
     }
