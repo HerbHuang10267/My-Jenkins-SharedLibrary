@@ -13,6 +13,16 @@ def executeSQL(Map config = [:]) {
     return null
 }
 
+def batchUpdateServerInfoStatus(Map config = [:], Map serverInfoMap = [:]) {
+    StringBuilder sqlBuilder = new StringBuilder()
+    sqlBuilder.append("BEGIN TRANSACTION;")
+    serverInfoMap.each { key, value ->
+        sqlBuilder.append("UPDATE serverinfo SET status = ${value}, updatedate = date('now') WHERE hostname = '${key}';")
+    }
+    sqlBuilder.append("COMMIT;")
+    executeSQL(project: config.project, sql: sqlBuilder.toString())
+}
+
 def getDataBasePath(String project) {
     switch (project) {
         case "9w":
