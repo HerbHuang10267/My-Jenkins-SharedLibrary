@@ -4,8 +4,8 @@ def test1() {
     return "Hello World! test1"
 }
 
-def callOtherMethod(def sql) {
+def callOtherMethod(Map config = [:]) {
     println("Hello World! test2 ")
-    def result = serverInfoService.executeSQL(sql)
+    def result = serverInfoService.executeSQL(config)
     return result
 }
