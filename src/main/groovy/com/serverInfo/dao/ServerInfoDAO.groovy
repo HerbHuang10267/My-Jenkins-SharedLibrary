@@ -6,31 +6,26 @@ package com.serverInfo.dao
 import groovy.sql.Sql
 import com.serverInfo.dto.ServerInfo
 
-class ServerInfoDAO implements Serializable {
+class ServerInfoDAO {
 
-    def script
-
-    ServerInfoDAO(script) {
-        this.script = script
-    }
-
-    def findServerInfo(String sql) {
+    def static queryServerInfo(String sql) {
 
 //        def dbPath = 'C:/Users/SAHerbHuangT14/initial-db.sqlite'
-        def dbPath = '/var/jenkins_home/sqlite_data/initial-db.sqlite'
-        script.println(dbPath)
+        def dbPath = '/var/jenkins_home/sqlite_data/9w-db.sqlite'
+        println(dbPath)
         def url = "jdbc:sqlite:$dbPath"
-        script.println(url)
-        def sqlInstance = script.Sql.newInstance(url, "org.sqlite.JDBC")
-        script.println(sqlInstance)
+        println(url)
+        def sqlInstance = Sql.newInstance(url, "org.sqlite.JDBC")
+        println(sqlInstance)
         List<ServerInfo> serverInfoList = new ArrayList<>();
-        script.println(serverInfoList)
+        println(serverInfoList)
         sqlInstance.eachRow(sql) { row ->
             ServerInfo serverInfo = new ServerInfo()
 
             serverInfo.setId(row.id)
             serverInfo.setServerType(row.servertype)
-            serverInfo.setName(row.name)
+            serverInfo.setServerTypeName(row.servertypename)
+            serverInfo.setHostName(row.hostname)
             serverInfo.setIp(row.ip)
             serverInfo.setPort(row.port)
             serverInfo.setStatus(row.status)
@@ -38,12 +33,12 @@ class ServerInfoDAO implements Serializable {
 
             serverInfoList.add(serverInfo)
 
-            script.println serverInfo.toString()
+            println serverInfo.toString()
         }
 
         sqlInstance.close()
-        script.println("===================")
-        script.println(serverInfoList)
+        println("===================")
+        println(serverInfoList)
         return serverInfoList
     }
 

@@ -1,4 +1,4 @@
-package test
+
 import com.serverInfo.dto.ServerInfo
 
 static void main(String[] args) {

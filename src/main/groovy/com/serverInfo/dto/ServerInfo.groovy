@@ -6,7 +6,7 @@ class ServerInfo {
     int serverType;
     String serverTypeName;
     String hostName;
-    String port;
+    int port;
     String ip;
     int status;
     String updateDate;
