@@ -1,4 +1,4 @@
-package com.common.database
+package com.database
 
 class DBQueryRunner {
     // TODO
