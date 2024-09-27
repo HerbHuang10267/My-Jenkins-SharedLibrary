@@ -6,8 +6,8 @@ def test1() {
 }
 
 def test2() {
-    println("Hello World! test2 ")
-    return "Hello World! test2"
+    println helloWorld2.test()
+    return helloWorld2.test()
 }
 
 def callOtherMethod(Map config = [:]) {
