@@ -1,6 +1,13 @@
 #!/usr/bin/env groovy
 import com.serverInfo.dto.ServerInfo
 
+static void main(String[] args) {
+    List<ServerInfo> serverInfoList = executeSQL(project: "local", sql: "SELECT * FROM serverinfo;")
+    println "==============="
+    for (ServerInfo serverInfo : serverInfoList) {
+        println serverInfo.toString()
+    }
+}
 def executeSQL(Map config = [:]) {
     try {
         def dbPath = getDataBasePath(config.project)
@@ -11,7 +18,7 @@ def executeSQL(Map config = [:]) {
         def proc = command.execute()
         def sout = new StringBuilder(), serr = new StringBuilder()
         proc.consumeProcessOutput(sout, serr)
-        proc.waitForOrKill(60 * 1000)
+        proc.waitForOrKill(10 * 1000)
         println("sout: ${sout}")
         return parseServerInfo(sout.toString())
     } catch (Exception e) {
@@ -32,6 +39,8 @@ def batchUpdateServerInfoStatus(Map config = [:], Map serverInfoMap = [:]) {
 
 def getDataBasePath(String project) {
     switch (project) {
+        case "local":
+            return 'C:/Users/SAHerbHuangT14/initial-db.sqlite'
         case "9w":
             return '/var/jenkins_home/sqlite_data/9w-db.sqlite'
         case "vk":
@@ -65,7 +74,7 @@ def parseServerInfo(String data) {
 
     List<ServerInfo> serverInfoList = new ArrayList()
     // 去除 header 及分隔線
-    def lines = data.readLines().drop(2)
+    def lines = data.readLines().drop(1)
     lines.each { line ->
         def fields = line.split(/\|/, -1) // 使用 | 分隔資料
         if (fields.size() >= 8) {
