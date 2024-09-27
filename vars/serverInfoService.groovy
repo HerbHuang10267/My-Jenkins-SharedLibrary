@@ -43,6 +43,20 @@ def getDataBasePath(String project) {
     }
 }
 
+def serverInfoNameMap(def serverInfoList) {
+
+    if (serverInfoList == null || serverInfoList.isEmpty()) {
+        return null
+    }
+    Map serverInfoNameMap = [:]
+    serverInfoList.each { server ->
+        serverInfoNameMap[server.serverTypeName] ?: serverInfoNameMap.put(server.serverTypeName, [])
+        List serverInfoStatusList = serverInfoNameMap.get(server.serverTypeName)
+        serverInfoStatusList.add(server)
+    }
+    return serverInfoNameMap
+}
+
 def parseServerInfo(String data) {
 
     if (data == null || data.isEmpty()) {
