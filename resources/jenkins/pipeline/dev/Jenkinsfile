@@ -19,7 +19,7 @@ pipeline {
                     sh 'dnf install sqlite -y'
                     sh "git gc"
 
-                    def data = serverInfoService.executeSQL(project: "local", sql: "SELECT * FROM serverinfo;")
+                    def data = serverInfoService.executeSQL(project: "9w", sql: "SELECT * FROM serverinfo;")
                     List serverInfoList = serverInfoService.parseServerInfo(data)
                     Map serverInfoNameMap = serverInfoService.serverInfoNameMap(serverInfoList)
 
