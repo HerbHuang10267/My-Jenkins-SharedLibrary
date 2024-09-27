@@ -12,6 +12,12 @@ def test2() {
 
 def callOtherMethod(Map config = [:]) {
     println("Hello World! test2 ")
-    def result = serverInfoService.queryServerInfoList(config)
+    List result = serverInfoService.queryServerInfoList(config)
+    return result
+}
+
+def callOtherMethod2(Map config = [:]) {
+    println("Hello World! test2 ")
+    List result = DBQueryRunner.dbQueryRunnerHello(config)
     return result
 }

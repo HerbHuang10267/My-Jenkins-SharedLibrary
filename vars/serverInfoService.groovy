@@ -1,13 +1,13 @@
 #!/usr/bin/env groovy
 import com.serverInfo.dto.ServerInfo
 
-static void main(String[] args) {
-    List<ServerInfo> serverInfoList = queryServerInfoList(project: "local", sql: "SELECT * FROM serverinfo;")
-    println "==============="
-    for (ServerInfo serverInfo : serverInfoList) {
-        println serverInfo.toString()
-    }
-}
+//static void main(String[] args) {
+//    List<ServerInfo> serverInfoList = queryServerInfoList(project: "local", sql: "SELECT * FROM serverinfo;")
+//    println "==============="
+//    for (ServerInfo serverInfo : serverInfoList) {
+//        println serverInfo.toString()
+//    }
+//}
 
 def queryServerInfoList(Map config = [:]) {
     def data = DBQueryRunner.executeSQL(project: config.project, sql: config.sql)

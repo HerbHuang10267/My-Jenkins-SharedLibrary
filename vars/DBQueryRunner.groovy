@@ -1,5 +1,10 @@
 #!/usr/bin/env groovy
 
+def dbQueryRunnerHello() {
+    println("Hello World! dbQueryRunnerHello ")
+    return "Hello World! dbQueryRunnerHello"
+}
+
 /*
  * Execute SQL query
  * @param config.project: project name
