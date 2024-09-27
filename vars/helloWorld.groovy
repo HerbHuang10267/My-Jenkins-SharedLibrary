@@ -1,9 +1,14 @@
 #!/usr/bin/env groovy
-import com.serverInfo.bo.ServerInfoBO
+import com.serverInfo.model.ServerInfoBO
 
 def test1() {
     println("Hello World! test1 ")
     return "Hello World! test1"
+}
+
+def test2() {
+    println("Hello World! test2 ")
+    return "Hello World! test2"
 }
 
 def callOtherMethod(Map config = [:]) {

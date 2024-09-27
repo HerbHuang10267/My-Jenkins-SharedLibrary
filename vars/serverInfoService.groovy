@@ -8,6 +8,7 @@ static void main(String[] args) {
         println serverInfo.toString()
     }
 }
+
 def executeSQL(Map config = [:]) {
     try {
         def dbPath = getDataBasePath(config.project)
