@@ -12,6 +12,6 @@ def test2() {
 
 def callOtherMethod(Map config = [:]) {
     println("Hello World! test2 ")
-    def result = serverInfoService.queryServerInfo(config)
+    def result = serverInfoService.queryServerInfoList(config)
     return result
 }

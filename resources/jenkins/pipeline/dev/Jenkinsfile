@@ -19,7 +19,7 @@ pipeline {
                     sh 'dnf install sqlite -y'
                     sh "git gc"
 
-                    List serverInfoList = serverInfoService.queryServerInfo(project: "9w", sql: "SELECT * FROM serverinfo;")
+                    List serverInfoList = serverInfoService.queryServerInfoList(project: "9w", sql: "SELECT * FROM serverinfo;")
                     Map serverInfoNameMap = serverInfoService.serverInfoNameMap(serverInfoList)
 
                     List serverGroupInfoService = serverGroupInfoService.queryServerGroupInfoList(project: "9w", sql: "SELECT * FROM servergroupinfo;")
