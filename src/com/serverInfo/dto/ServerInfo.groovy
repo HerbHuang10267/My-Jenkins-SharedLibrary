@@ -10,18 +10,5 @@ class ServerInfo {
     String ip;
     int status;
     String updateDate;
-
-    @Override
-    String toString() {
-        return "ServerInfo{" +
-                "id=" + id +
-                ", serverType=" + serverType +
-                ", serverTypeName='" + serverTypeName + '\'' +
-                ", hostName='" + hostName + '\'' +
-                ", port='" + port + '\'' +
-                ", ip='" + ip + '\'' +
-                ", status=" + status +
-                ", updateDate='" + updateDate + '\'' +
-                '}';
-    }
+    
 }
