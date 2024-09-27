@@ -1,6 +1,6 @@
 @Library('My-Jenkins-SharedLibrary@dev')_
 
-def DataBase = [:]
+def PipelineHandler = [:]
 
 pipeline {
     agent any
@@ -19,12 +19,17 @@ pipeline {
                     sh 'dnf install sqlite -y'
                     sh "git gc"
 
-                    def data = serverInfoService.executeSQL(project: "9w", sql: "SELECT * FROM serverinfo;")
-                    List serverInfoList = serverInfoService.parseServerInfo(data)
+                    List serverInfoList = serverInfoService.queryServerInfo(project: "9w", sql: "SELECT * FROM serverinfo;")
                     Map serverInfoNameMap = serverInfoService.serverInfoNameMap(serverInfoList)
 
-                    DataBase.put("serverInfoList", serverInfoList)
-                    DataBase.put("serverInfoNameMap", serverInfoNameMap)
+                    List serverGroupInfoService = serverGroupInfoService.queryServerGroupInfoList(project: "9w", sql: "SELECT * FROM servergroupinfo;")
+                    List shotDownServerOrderList = serverGroupInfoService.sort { it.shutDownOrder }.collect()
+                    List startUpServerOrderList = serverGroupInfoService.sort { it.startUpOrder }.collect()
+
+                    PipelineHandler.put("serverInfoList", serverInfoList)
+                    PipelineHandler.put("serverInfoNameMap", serverInfoNameMap)
+                    PipelineHandler.put("shotDownServerOrder", shotDownServerOrderList)
+                    PipelineHandler.put("startUpServerOrder", startUpServerOrderList)
                 }
             }
         }

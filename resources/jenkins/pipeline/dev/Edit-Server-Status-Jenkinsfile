@@ -20,7 +20,7 @@ pipeline {
                 script {
                     Map serverInfoMap = collectCheckBoxToMap(Servers)
                     println serverInfoMap
-                    serverInfoService.batchUpdateServerInfoStatus(project: "9w", serverInfoMap)
+                    serverInfoService.updateServerInfoStatus(project: "9w", serverInfoMap)
                 }
             }
         }
