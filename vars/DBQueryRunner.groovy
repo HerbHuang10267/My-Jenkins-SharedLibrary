@@ -18,7 +18,7 @@ def executeSQL(Map config = [:]) {
         println("sql: ${sql}")
         def command = ["sqlite3", dbPath, ".headers on", sql]
         def proc = command.execute()
-        def sout = new StringBuilder(), serr = new StringBuilder()
+        def sout = StringBuilder.newInstance(), serr = StringBuilder.newInstance()
         proc.consumeProcessOutput(sout, serr)
         proc.waitForOrKill(10 * 1000)
         println("sout: ${sout}")
