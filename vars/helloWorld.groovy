@@ -20,7 +20,7 @@ def callOtherMethod(Map config = [:]) {
 def callOtherMethod2(Map config = [:]) {
     println("Hello World! callOtherMethod2 ")
     DBQueryRunner dBQueryRunner = new DBQueryRunner()
-    List result = dBQueryRunner.executeSQL(config)
-    println result
+    def result = dBQueryRunner.executeSQL(config)
+    println("result: ${result}")
     return result
 }
