@@ -1,4 +1,5 @@
 #!/usr/bin/env groovy
+import com.common.database.DBQueryRunner
 
 def test1() {
     println("Hello World! test1 ")
@@ -17,7 +18,9 @@ def callOtherMethod(Map config = [:]) {
 }
 
 def callOtherMethod2(Map config = [:]) {
-    println("Hello World! test2 ")
-    List result = DBQueryRunner.dbQueryRunnerHello(config)
+    println("Hello World! callOtherMethod2 ")
+    DBQueryRunner dBQueryRunner = new DBQueryRunner()
+    List result = dBQueryRunner.executeSQL(config)
+    println result
     return result
 }
