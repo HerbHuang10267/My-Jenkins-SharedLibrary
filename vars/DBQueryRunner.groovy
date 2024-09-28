@@ -1,10 +1,4 @@
 #!/usr/bin/env groovy
-
-def dbQueryRunnerHello() {
-    println("Hello World! dbQueryRunnerHello ")
-    return "Hello World! dbQueryRunnerHello"
-}
-
 /*
  * Execute SQL query
  * @param config.project: project name
@@ -18,7 +12,7 @@ def executeSQL(Map config = [:]) {
         println("sql: ${sql}")
         def command = ["sqlite3", dbPath, ".headers on", sql]
         def proc = command.execute()
-        def sout = StringBuilder.newInstance(), serr = StringBuilder.newInstance()
+        def sout = new StringBuilder(), serr = new StringBuilder()
         proc.consumeProcessOutput(sout, serr)
         proc.waitForOrKill(10 * 1000)
         println("sout: ${sout}")
