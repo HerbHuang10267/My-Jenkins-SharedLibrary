@@ -11,7 +11,6 @@ class ServerInfo {
     int status;
     String updateDate;
 
-
     @Override
     String toString() {
         return "ServerInfo{" +

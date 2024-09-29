@@ -11,8 +11,8 @@ static void main(String[] args) {
 }
 
 def queryServerInfoList(Map config = [:]) {
-    DBQueryRunner dbQueryRunner = new DBQueryRunner()
-    def data = dbQueryRunner.executeSQL(project: config.project, sql: config.sql)
+    DBQueryRunner db = new DBQueryRunner()
+    def data = db.executeSQL(project: config.project, sql: config.sql)
     return parseServerInfoList(data)
 }
 
@@ -21,8 +21,8 @@ def updateServerInfoStatus(Map config = [:], Map serverInfoMap = [:]) {
     serverInfoMap.each { key, value ->
         sqlBuilder.append("UPDATE serverinfo SET status = ${value}, updatedate = date('now') WHERE hostname = '${key}';")
     }
-    DBQueryRunner dbQueryRunner = new DBQueryRunner()
-    dbQueryRunner.executeUpdate(project: config.project, sql: sqlBuilder.toString())
+    DBQueryRunner db = new DBQueryRunner()
+    db.executeUpdate(project: config.project, sql: sqlBuilder.toString())
 }
 
 def parseServerInfoList(String data) {

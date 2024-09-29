@@ -1,5 +1,5 @@
 #!/usr/bin/env groovy
-import com.serverInfo.dto.ServerGroupInfo
+import com.serverGroupInfo.dto.ServerGroupInfo
 import com.common.database.DBQueryRunner
 
 static void main(String[] args) {
@@ -18,8 +18,8 @@ static void main(String[] args) {
 }
 
 def queryServerGroupInfoList(Map config = [:]) {
-    DBQueryRunner dbQueryRunner = new DBQueryRunner()
-    def data = dbQueryRunner.executeSQL(project: config.project, sql: config.sql)
+    DBQueryRunner db = new DBQueryRunner()
+    def data = db.executeSQL(project: config.project, sql: config.sql)
     return parseServerGroupInfoList(data)
 }
 

@@ -1,11 +1,10 @@
-package com.serverInfo.dto
+package com.serverGroupInfo.dto
 
 class ServerGroupInfo {
 
     String serverGroup;
     int shutDownOrder;
     int startUpOrder;
-
 
     @Override
     String toString() {
