@@ -1,7 +1,9 @@
 package com.serverInfo.model
 
 import groovy.transform.Field
-@Field def db = new GroovyClassLoader(getClass().getClassLoader()).parseClass(new File("../../../com/common/database/DBQueryRunner.groovy")).newInstance()
+import com.common.database.DBQueryRunner
+
+@Field def db = new DBQueryRunner()
 
 def queryActiveHostName(Map config = [:]) {
     def con = [project: config.project, sql: "SELECT hostname FROM serverinfo WHERE status = 1 ORDER BY servertype;"]
