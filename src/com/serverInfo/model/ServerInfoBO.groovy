@@ -1,13 +1,14 @@
+#!/usr/bin/env groovy
 package com.serverInfo.model
 
 import groovy.transform.Field
 import com.common.database.DBQueryRunner
 
-@Field def db = new DBQueryRunner()
+//@Field def db = new DBQueryRunner()
 
 def queryActiveHostName(Map config = [:]) {
-    def con = [project: config.project, sql: "SELECT hostname FROM serverinfo WHERE status = 1 ORDER BY servertype;"]
-    def data = db.executeSQL(con)
+    def con = [project: config.project, sql: "SELECT hostname FROM serverinfo WHERE status = 1 ORDER BY hostname;"]
+    def data = new DBQueryRunner().executeSQL(con)
     return parseHostNameList(data)
 }
 

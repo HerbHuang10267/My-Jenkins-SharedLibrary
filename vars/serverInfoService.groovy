@@ -36,20 +36,22 @@ def parseServerInfoList(String data) {
     def lines = data.readLines().drop(1)
     lines.each { line ->
         def fields = line.split(/\|/, -1) // 使用 | 分隔資料
-        if (fields.size() >= 8) {
-            // id|hostname|ip|port|servertype|servertypename|status|updatedate
-            def serverInfo = new ServerInfo (
-                    id: fields[0] as int,            // id
-                    hostName: fields[1],             // server 名稱
-                    ip: fields[2],                   // ip
-                    port: fields[3] as int,          // port
-                    serverType: fields[4] as int,    // server type
-                    serverTypeName: fields[5],       // server type name
-                    status: fields[6] as int,        // 狀態
-                    updateDate: fields[7]            // 更新日期
-            )
-            serverInfoList.add(serverInfo)
-        }
+        // id|hostname|ip|port|servertype|servergroup|status|tomcatpath|startupshellpath|shutdownshellpath|deployshellpath|updatedate
+        def serverInfo = new ServerInfo (
+                id: fields[0] as int,            // id
+                hostName: fields[1],             // server 名稱
+                ip: fields[2],                   // ip
+                port: fields[3] as int,          // port
+                serverType: fields[4] as int,    // server type
+                serverGroup: fields[5],          // server group
+                status: fields[6] as int,        // 狀態
+                tomcatPath: fields[7],           // tomcat path
+                startUpShellPath: fields[8],     // start up shell path
+                shutDownShellPath: fields[9],    // shut down shell path
+                deployShellPath: fields[10],     // deploy shell path
+                updateDate: fields[11]           // 更新日期
+        )
+        serverInfoList.add(serverInfo)
     }
     return serverInfoList
 }

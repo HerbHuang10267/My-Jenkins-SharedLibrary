@@ -38,7 +38,6 @@ def executeUpdate(Map config = [:]) {
     executeSQL(project: config.project, sql: sqlBuilder.toString())
 }
 
-
 def getDataBasePath(String project) {
     switch (project) {
         case "local":

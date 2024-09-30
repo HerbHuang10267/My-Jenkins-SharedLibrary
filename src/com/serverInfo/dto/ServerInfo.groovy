@@ -4,11 +4,15 @@ class ServerInfo {
 
     int id;
     int serverType;
-    String serverTypeName;
+    String serverGroup;
     String hostName;
     int port;
     String ip;
     int status;
+    String tomcatPath
+    String startUpShellPath
+    String shutDownShellPath
+    String deployShellPath
     String updateDate;
 
     @Override
@@ -16,11 +20,15 @@ class ServerInfo {
         return "ServerInfo{" +
                 "id=" + id +
                 ", serverType=" + serverType +
-                ", serverTypeName='" + serverTypeName + '\'' +
+                ", serverGroup='" + serverGroup + '\'' +
                 ", hostName='" + hostName + '\'' +
                 ", port=" + port +
                 ", ip='" + ip + '\'' +
                 ", status=" + status +
+                ", tomcatPath='" + tomcatPath + '\'' +
+                ", startUpShellPath='" + startUpShellPath + '\'' +
+                ", shutDownShellPath='" + shutDownShellPath + '\'' +
+                ", deployShellPath='" + deployShellPath + '\'' +
                 ", updateDate='" + updateDate + '\'' +
                 '}';
     }

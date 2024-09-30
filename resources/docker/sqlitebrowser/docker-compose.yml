@@ -1,0 +1,17 @@
+services:
+  sqlitebrowser:
+    image: linuxserver/sqlitebrowser
+    ports:
+      - "3000:3000"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Taipei
+      - ENABLE_UWSGI=true
+    volumes:
+      - "jenkins:/data"
+    container_name: sqlitebrowser
+
+volumes:
+  jenkins:
+    external: true
