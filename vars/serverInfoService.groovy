@@ -8,6 +8,15 @@ static void main(String[] args) {
     for (ServerInfo serverInfo : serverInfoList) {
         println serverInfo.toString()
     }
+
+    Map serverInfoGroupMap = serverInfoGroupMap(serverInfoList)
+    println "==============="
+    serverInfoGroupMap.each { key, value ->
+        println "server group: ${key}"
+        for (ServerInfo serverInfo : value) {
+            println serverInfo.toString()
+        }
+    }
 }
 
 def queryServerInfoList(Map config = [:]) {
@@ -56,16 +65,16 @@ def parseServerInfoList(String data) {
     return serverInfoList
 }
 
-def serverInfoNameMap(def serverInfoList) {
+def serverInfoGroupMap(def serverInfoList) {
 
     if (serverInfoList == null || serverInfoList.isEmpty()) {
         return null
     }
-    Map serverInfoNameMap = [:]
+    Map serverInfoGroupMap = [:]
     serverInfoList.each { server ->
-        serverInfoNameMap[server.serverTypeName] ?: serverInfoNameMap.put(server.serverTypeName, [])
-        List serverInfoStatusList = serverInfoNameMap.get(server.serverTypeName)
+        serverInfoGroupMap[server.serverGroup] ?: serverInfoGroupMap.put(server.serverGroup, [])
+        List serverInfoStatusList = serverInfoGroupMap.get(server.serverGroup)
         serverInfoStatusList.add(server)
     }
-    return serverInfoNameMap
+    return serverInfoGroupMap
 }
