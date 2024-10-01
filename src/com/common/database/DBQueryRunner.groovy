@@ -6,7 +6,7 @@ package com.common.database
  * @param config.project: project name
  * @param config.sql: SQL
  */
-def executeSQL(Map config = [:]) {
+def static executeSQL(Map config = [:]) {
     try {
         def dbPath = getDataBasePath(config.project)
         def sql = config.sql
@@ -30,7 +30,7 @@ def executeSQL(Map config = [:]) {
  * @param config.project: project name
  * @param config.sql: SQL
  */
-def executeUpdate(Map config = [:]) {
+def static executeUpdate(Map config = [:]) {
     StringBuilder sqlBuilder = new StringBuilder()
     sqlBuilder.append("BEGIN TRANSACTION;")
     sqlBuilder.append(config.sql)
@@ -38,7 +38,7 @@ def executeUpdate(Map config = [:]) {
     executeSQL(project: config.project, sql: sqlBuilder.toString())
 }
 
-def getDataBasePath(String project) {
+def static getDataBasePath(String project) {
     switch (project) {
         case "local":
             return 'C:/Users/SAHerbHuangT14/9w-db.sqlite'

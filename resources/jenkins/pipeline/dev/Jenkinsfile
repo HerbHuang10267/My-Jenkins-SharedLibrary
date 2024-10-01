@@ -20,7 +20,7 @@ pipeline {
                     sh "git gc"
 
                     List serverInfoList = serverInfoService.queryServerInfoList(project: "9w", sql: "SELECT * FROM serverinfo;")
-                    Map serverInfoGroupMap = serverInfoService.serverInfoGroupMap(serverInfoList)
+                    Map serverInfoGroupMap = serverInfoService.serverInfoToGroupMap(serverInfoList)
 
                     List serverGroupInfoService = serverGroupInfoService.queryServerGroupInfoList(project: "9w", sql: "SELECT * FROM servergroupinfo;")
                     List shotDownServerOrderList = serverGroupInfoService.sort { it.shutDownOrder }.collect()
