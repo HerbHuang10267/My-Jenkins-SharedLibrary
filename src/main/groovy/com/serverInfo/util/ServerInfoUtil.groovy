@@ -1,7 +1,7 @@
 #!/usr/bin/env groovy
-package com.serverInfo.service
+package com.serverInfo.util
 
-def static serverInfoToGroupMap(List serverInfoList) {
+def serverInfoToGroupMap(List serverInfoList) {
 
     if (serverInfoList == null || serverInfoList.isEmpty()) {
         return null
@@ -17,7 +17,7 @@ def static serverInfoToGroupMap(List serverInfoList) {
     return serverInfoGroupMap
 }
 
-def static collectCheckBoxToMap(String optionStr) {
+def collectCheckBoxToMap(String optionStr) {
     Map checkBoxMap = [:]
     String[] optionArray = optionStr.split(",")
     for (int i = 0; i < optionArray.size(); i += 2) {

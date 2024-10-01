@@ -4,9 +4,9 @@ package com.serverGroupInfo.model
 import com.serverGroupInfo.dao.ServerGroupInfoDAO
 import com.serverGroupInfo.dto.ServerGroupInfo
 
-def static queryServerGroupInfoList(Map config = [:]) {
+def queryServerGroupInfoList(Map config = [:]) {
 
-    def data = ServerGroupInfoDAO.queryServerGroupInfoList(config)
+    def data = new ServerGroupInfoDAO().queryServerGroupInfoList(config)
 
     if (data == null || data.isEmpty()) {
         return null

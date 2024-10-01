@@ -19,8 +19,8 @@ static void main(String[] args) {
     println startUpOrderList
 }
 
-def static queryServerGroupInfoList(Map config = [:]) {
-    return ServerGroupInfoBO.queryServerGroupInfoList(config)
+def queryServerGroupInfoList(Map config = [:]) {
+    return new ServerGroupInfoBO().queryServerGroupInfoList(config)
 }
 
-//return this
+return this

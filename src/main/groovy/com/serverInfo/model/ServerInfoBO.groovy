@@ -5,7 +5,7 @@ import com.serverInfo.dao.ServerInfoDAO
 import com.serverInfo.dto.ServerInfo
 
 def static queryServerInfoList(Map config = [:]) {
-    def data = ServerInfoDAO.queryServerInfoList(project: config.project)
+    def data = new ServerInfoDAO().queryServerInfoList(project: config.project)
 
     if (data == null || data.isEmpty()) {
         return null
