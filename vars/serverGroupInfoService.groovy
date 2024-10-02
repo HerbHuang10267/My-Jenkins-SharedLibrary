@@ -20,6 +20,27 @@ static void main(String[] args) {
     println startUpOrderList
 }
 
+List serverGroupInfoList = queryServerGroupInfoList(project: "local")
+println "==============="
+for (ServerGroupInfo serverGroupInfo : serverGroupInfoList) {
+    println serverGroupInfo.toString()
+}
+
+List<ServerGroupInfo> shutDownServerOrderList = new ArrayList<>(serverGroupInfoList)
+shutDownServerOrderList.sort(Comparator.comparingInt { it.shutDownOrder })
+println shutDownServerOrderList
+
+List<ServerGroupInfo> startUpServerOrderList = new ArrayList<>(serverGroupInfoList)
+startUpServerOrderList.sort(Comparator.comparingInt { it.startUpOrder })
+println startUpServerOrderList
+
+
+//List startUpOrderList = serverGroupInfoList.sort { it.startUpOrder }.collect()
+//println startUpOrderList
+//
+//List shutDownOrderList = serverGroupInfoList.sort { it.shutDownOrder }.collect()
+//println shutDownOrderList
+
 def queryServerGroupInfoList(Map config = [:]) {
     return serverGroupInfoBO.queryServerGroupInfoList(config)
 }

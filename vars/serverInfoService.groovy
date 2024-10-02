@@ -18,7 +18,7 @@ def queryServerInfoList(Map config = [:]) {
     return serverInfoBO.queryServerInfoList(config)
 }
 
-def staticupdateServerInfoStatus(Map config = [:], Map serverInfoMap = [:]) {
+def updateServerInfoStatus(Map config = [:], Map serverInfoMap = [:]) {
     return serverInfoBO.updateServerInfoStatus(config, serverInfoMap)
 }
 
