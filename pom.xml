@@ -30,7 +30,7 @@
 		<outputDirectory>${project.build.directory}/</outputDirectory>
 		<resources>
 			<resource>
-				<directory>src/main/groovy</directory>
+				<directory>src</directory>
 			</resource>
 		</resources>
         <plugins>
