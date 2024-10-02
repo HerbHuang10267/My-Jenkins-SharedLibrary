@@ -25,4 +25,8 @@ def genServerStatusOptionHtml(Map config = [:]) {
     return new ServerInfoBO().genServerStatusOptionHtml(config)
 }
 
+def queryActiveHostName(Map config = [:]) {
+    return new ServerInfoBO().queryActiveHostName(config)
+}
+
 return this
