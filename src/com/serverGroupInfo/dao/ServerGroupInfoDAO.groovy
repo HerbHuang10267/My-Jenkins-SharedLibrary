@@ -9,7 +9,8 @@ import groovy.transform.Field
 
 def queryServerGroupInfoList(Map config = [:]) {
 
-    def data = dbQueryRunner.executeSQL(project: config.project, sql: "SELECT * FROM servergroupinfo ORDER BY "+config.sort+";")
+    def orderBy = config.sort == null ? "" : (" ORDER BY " + config.sort)
+    def data = dbQueryRunner.executeSQL(project: config.project, sql: "SELECT * FROM servergroupinfo " + orderBy + ";")
 
     if (data == null || data.isEmpty()) {
         return null
