@@ -1,8 +1,9 @@
 #!/usr/bin/env groovy
-package com.serverGroupInfo.service
-
 import com.serverGroupInfo.dto.ServerGroupInfo
 import com.serverGroupInfo.model.ServerGroupInfoBO
+import groovy.transform.Field
+
+@Field ServerGroupInfoBO serverGroupInfoBO = new ServerGroupInfoBO()
 
 static void main(String[] args) {
     List<ServerGroupInfo> serverGroupInfoList = queryServerGroupInfoList(project: "local")
@@ -20,7 +21,7 @@ static void main(String[] args) {
 }
 
 def queryServerGroupInfoList(Map config = [:]) {
-    return new ServerGroupInfoBO().queryServerGroupInfoList(config)
+    return serverGroupInfoBO.queryServerGroupInfoList(config)
 }
 
-return this
+//return this

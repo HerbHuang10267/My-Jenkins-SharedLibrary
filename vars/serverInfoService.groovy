@@ -1,11 +1,12 @@
 #!/usr/bin/env groovy
-package com.serverInfo.service
-
 import com.serverInfo.dto.ServerInfo
 import com.serverInfo.model.ServerInfoBO
+import groovy.transform.Field
+
+@Field ServerInfoBO serverInfoBO = new ServerInfoBO()
 
 static void main(String[] args) {
-    this.println "START"
+    println "START"
     List<ServerInfo> serverInfoList = queryServerInfoList(project: "local")
     println "==============="
     for (ServerInfo serverInfo : serverInfoList) {
@@ -14,19 +15,19 @@ static void main(String[] args) {
 }
 
 def queryServerInfoList(Map config = [:]) {
-    return new ServerInfoBO().queryServerInfoList(config)
+    return serverInfoBO.queryServerInfoList(config)
 }
 
 def staticupdateServerInfoStatus(Map config = [:], Map serverInfoMap = [:]) {
-    return new ServerInfoBO().updateServerInfoStatus(config, serverInfoMap)
+    return serverInfoBO.updateServerInfoStatus(config, serverInfoMap)
 }
 
 def genServerStatusOptionHtml(Map config = [:]) {
-    return new ServerInfoBO().genServerStatusOptionHtml(config)
+    return serverInfoBO.genServerStatusOptionHtml(config)
 }
 
 def queryActiveHostName(Map config = [:]) {
-    return new ServerInfoBO().queryActiveHostName(config)
+    return serverInfoBO.queryActiveHostName(config)
 }
 
-return this
+//return this
