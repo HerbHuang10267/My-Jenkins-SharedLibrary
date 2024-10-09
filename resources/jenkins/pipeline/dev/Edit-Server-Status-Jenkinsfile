@@ -18,7 +18,7 @@ pipeline {
         stage("update server info") {
             steps {
                 script {
-                    Map serverInfoMap = collectCheckBoxToMap(Servers)
+                    Map serverInfoMap = transferUtil.collectCheckBoxToMap(Servers)
                     println serverInfoMap
                     serverInfoService.updateServerInfoStatus(project: "9w", serverInfoMap)
                 }
