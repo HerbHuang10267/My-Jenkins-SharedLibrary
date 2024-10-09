@@ -33,7 +33,7 @@ def queryServerInfoList(Map config = [:]) {
                 filebeatConfigPath: fields[8],   // filebeat config path
                 startUpShellPath: fields[9],     // start up shell path
                 shutDownShellPath: fields[10],   // shut down shell path
-                deployShellPath: fields[11],     // deploy shell path
+                deployShellPath: fields[11],     // deploy_server shell path
                 filebeatShellPath: fields[12],   // filebeat shell path
                 ip2LocationPath: fields[13],     // ip2location path
                 updateDate: fields[14]           // 更新日期

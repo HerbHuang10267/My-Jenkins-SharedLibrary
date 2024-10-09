@@ -17,25 +17,4 @@ class ServerInfo {
     String filebeatShellPath
     String ip2LocationPath
     String updateDate;
-
-    @Override
-    String toString() {
-        return "ServerInfo{" +
-                "id=" + id +
-                ", hostName='" + hostName + '\'' +
-                ", ip='" + ip + '\'' +
-                ", port=" + port +
-                ", serverType=" + serverType +
-                ", serverGroup='" + serverGroup + '\'' +
-                ", status=" + status +
-                ", tomcatPath='" + tomcatPath + '\'' +
-                ", filebeatConfigPath='" + filebeatConfigPath + '\'' +
-                ", startUpShellPath='" + startUpShellPath + '\'' +
-                ", shutDownShellPath='" + shutDownShellPath + '\'' +
-                ", deployShellPath='" + deployShellPath + '\'' +
-                ", filebeatShellPath='" + filebeatShellPath + '\'' +
-                ", ip2LocationPath='" + ip2LocationPath + '\'' +
-                ", updateDate='" + updateDate + '\'' +
-                '}';
-    }
 }

@@ -6,12 +6,4 @@ class ServerGroupInfo {
     int shutDownOrder;
     int startUpOrder;
 
-    @Override
-    String toString() {
-        return "ServerGroupInfo{" +
-                "serverGroup='" + serverGroup + '\'' +
-                ", shutDownOrder=" + shutDownOrder +
-                ", startUpOrder=" + startUpOrder +
-                '}';
-    }
 }
