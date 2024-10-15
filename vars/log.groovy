@@ -1,4 +1,7 @@
 #!/usr/bin/env groovy
+import com.serverInfo.dto.ServerInfo
+import com.serverGroupInfo.dto.ServerGroupInfo
+
 def logServerInfo(List<ServerInfo> serverInfoList) {
     StringBuilder sb = new StringBuilder()
     for (ServerInfo serverInfo : serverInfoList) {
