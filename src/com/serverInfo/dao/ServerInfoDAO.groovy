@@ -51,25 +51,4 @@ def updateServerInfoStatus(Map config = [:], Map serverInfoMap = [:]) {
     dbQueryRunner.executeUpdate(project: config.project, sql: sqlBuilder.toString())
 }
 
-def queryHostName(Map config = [:]) {
-    def con = [project: config.project, sql: "SELECT hostname FROM serverinfo ORDER BY hostname;"]
-    def data = dbQueryRunner.executeSQL(con)
-
-    if (data == null || data.isEmpty()) {
-        return null
-    }
-
-    List hostNameList = []
-    // 去除 header 及分隔線
-    def lines = data.readLines().drop(1)
-    lines.each { line ->
-        def fields = line.split(/\|/, -1) // 使用 | 分隔資料
-        if (fields.size() >= 1) {
-            hostNameList.add(fields[0])
-        }
-    }
-
-    return hostNameList
-}
-
 return this

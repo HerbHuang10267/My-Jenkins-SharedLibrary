@@ -22,8 +22,4 @@ def updateServerInfoStatus(Map config = [:], Map serverInfoMap = [:]) {
     return serverInfoBO.updateServerInfoStatus(config, serverInfoMap)
 }
 
-def genServerStatusOptionHtml(Map config = [:]) {
-    return serverInfoBO.genServerStatusOptionHtml(config)
-}
-
 //return this

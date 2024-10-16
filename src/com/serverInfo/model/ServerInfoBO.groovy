@@ -16,37 +16,4 @@ def updateServerInfoStatus(Map config = [:], Map serverInfoMap = [:]) {
     serverInfoDAO.updateServerInfoStatus(config, serverInfoMap)
 }
 
-def queryHostName(Map config = [:]) {
-    def hostNameList = serverInfoDAO.queryHostName(config)
-    return hostNameList
-}
-
-def genServerStatusOptionHtml(Map config = [:]) {
-
-    List<ServerInfo> serverInfoList = serverInfoDAO.queryServerInfoList(config)
-
-    if (serverInfoList == null || serverInfoList.isEmpty()) {
-        return "[No Data Found]"
-    }
-
-    serverInfoList.sort { it.serverGroup }
-
-    def optionResult =  new StringBuilder()
-    def previousServerType = -1
-    for (ServerInfo serverInfo : serverInfoList) {
-        optionResult.append("<option value=\"${serverInfo.hostName}\">${serverInfo.hostName}</option>")
-
-        if (previousServerType != serverInfo.getServerType()) {
-            optionResult.append("<br><br><h5> ================= ${serverInfo.getServerGroup()} ================= </h5>")
-        }
-
-        def checkClass = (serverInfo.getStatus() == 1 ? "checked" : "")
-        optionResult.append("<input name='value' value='${serverInfo.getHostName()}' type='hidden'>")
-                .append("<input id='${serverInfo.getId()}' name='value' value='${serverInfo.getHostName()}' type='checkbox' ${checkClass}>")
-                .append("<label for='${serverInfo.getId()}'>${serverInfo.getHostName()}</label>")
-
-        previousServerType = serverInfo.getServerType()
-    }
-}
-
 return this
