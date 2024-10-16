@@ -3,9 +3,8 @@ import com.serverInfo.dto.ServerInfo
 
 def call(ServerInfo serverInfo) {
 
-    def remoteUser = "root@${serverInfo.ip}"
-    def remoteScript = serverInfo.shutDownShellPath
-    def command = ["ssh", remoteUser, "sh", remoteScript]
+    def remoteScript = "root@${serverInfo.ip}:${serverInfo.tomcatPath}/ROOT.zip"
+    def command = ["scp", "target/ROOT.war", remoteScript]
 
     def proc = command.execute()
     def sout = new StringBuilder(), serr = new StringBuilder()

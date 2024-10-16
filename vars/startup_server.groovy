@@ -4,7 +4,7 @@ import com.serverInfo.dto.ServerInfo
 def call(ServerInfo serverInfo) {
 
     def remoteUser = "root@${serverInfo.ip}"
-    def remoteScript = serverInfo.shutDownShellPath
+    def remoteScript = serverInfo.startUpShellPath
     def command = ["ssh", remoteUser, "sh", remoteScript]
 
     def proc = command.execute()
