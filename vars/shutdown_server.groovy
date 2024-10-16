@@ -21,5 +21,5 @@ def call(ServerInfo serverInfo) {
     proc.consumeProcessOutput(sout, serr)
     proc.waitForOrKill(60 * 1000)
     println("sout: ${sout}")
-    println("sout: ${serr}")
+    println("serr: ${serr}")
 }
