@@ -14,7 +14,6 @@ def call(ServerInfo serverInfo) {
     if (proc.exitValue() == 0) {
         println("sout: ${sout}")
     } else {
-        currentBuild.result = 'FAILURE'
-        println("serr: ${serr}")
+        error("error: ${serr}")
     }
 }
