@@ -13,10 +13,4 @@ def call(ServerInfo serverInfo) {
 
     println("sout: ${sout}")
     println("serr: ${serr}")
-
-    if (proc.exitValue() !=0 ) {
-        System.exit(-1)
-    } else {
-        System.exit(0)
-    }
 }
