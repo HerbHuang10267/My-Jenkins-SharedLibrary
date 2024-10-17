@@ -10,7 +10,11 @@ def call(ServerInfo serverInfo) {
     def sout = new StringBuilder(), serr = new StringBuilder()
     proc.consumeProcessOutput(sout, serr)
     proc.waitForOrKill(60 * 1000)
-
-    println("sout: ${sout}")
-    println("serr: ${serr}")
+    println("exitValue: ${proc.exitValue()}")
+    if (proc.exitValue() == 0) {
+        println("sout: ${sout}")
+    } else {
+        currentBuild.result = 'FAILURE'
+        println("serr: ${serr}")
+    }
 }
