@@ -10,6 +10,13 @@ def call(ServerInfo serverInfo) {
     def sout = new StringBuilder(), serr = new StringBuilder()
     proc.consumeProcessOutput(sout, serr)
     proc.waitForOrKill(60 * 1000)
+
     println("sout: ${sout}")
     println("serr: ${serr}")
+
+    if (proc.exitValue() !=0 ) {
+        System.exit(-1)
+    } else {
+        System.exit(0)
+    }
 }
