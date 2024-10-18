@@ -86,8 +86,10 @@ pipeline {
                             }
                         }
 
-                        parallel tasks
-                        sleep(time:1,unit:"SECONDS")
+                        if (!tasks.isEmpty()) {
+                            parallel tasks
+                            sleep(time:1,unit:"SECONDS")
+                        }
                     }
                 }
             }
@@ -120,7 +122,9 @@ pipeline {
 
                     }
 
-                    parallel tasks
+                    if (!tasks.isEmpty()) {
+                        parallel tasks
+                    }
                 }
             }
         }
@@ -137,6 +141,7 @@ pipeline {
                     List serverSelectedList = DBData.get("serverSelectedList")
                     List serverInfoList = DBData.get("serverInfoList")
 
+
                     for (serverInfoData in serverInfoList) {
 
                         def serverInfo = serverInfoData
@@ -152,7 +157,9 @@ pipeline {
 
                     }
 
-                    parallel tasks
+                    if (!tasks.isEmpty()) {
+                        parallel tasks
+                    }
                 }
             }
         }
@@ -189,8 +196,10 @@ pipeline {
                             }
                         }
 
-                        parallel tasks
-                        sleep(time:5,unit:"SECONDS")
+                        if (!tasks.isEmpty()) {
+                            parallel tasks
+                            sleep(time:2,unit:"SECONDS")
+                        }
                     }
                 }
             }
