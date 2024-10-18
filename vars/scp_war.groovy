@@ -2,7 +2,7 @@
 import com.serverInfo.dto.ServerInfo
 
 def call(ServerInfo serverInfo) {
-
+    echo "call scp war $serverInfo.ip"
     sh """
         pwd
         echo "Hello scp war $serverInfo.ip
