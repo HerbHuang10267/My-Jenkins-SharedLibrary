@@ -3,10 +3,10 @@ import com.serverInfo.dto.ServerInfo
 
 def call(ServerInfo serverInfo) {
 
-    sh '''
-        echo "Hello scp war ${serverInfo.ip}"
+    sh """
         pwd
-    '''
+        echo "Hello scp war ${serverInfo.ip}
+    """
 //    def remoteScript = "root@${serverInfo.ip}:${serverInfo.tomcatPath}/ROOT.zip"
 //    def command = ["scp", "target/ROOT.war", remoteScript]
 //
