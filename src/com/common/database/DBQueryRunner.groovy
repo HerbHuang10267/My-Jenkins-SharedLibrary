@@ -10,14 +10,14 @@ def executeSQL(Map config = [:]) {
     try {
         def dbPath = getDataBasePath(config.project)
         def sql = config.sql
-        println("dbPath: ${dbPath}")
-        println("sql: ${sql}")
+//        println("dbPath: ${dbPath}")
+//        println("sql: ${sql}")
         def command = ["sqlite3", dbPath, ".headers on", sql]
         def proc = command.execute()
         def sout = new StringBuilder(), serr = new StringBuilder()
         proc.consumeProcessOutput(sout, serr)
         proc.waitForOrKill(10 * 1000)
-        println("sout: ${sout}")
+//        println("sout: ${sout}")
         return sout.toString()
     } catch (Exception e) {
         println("SQLite excute SQL failed: ${e.getMessage()} ")
