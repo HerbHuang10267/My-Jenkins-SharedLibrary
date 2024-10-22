@@ -17,4 +17,6 @@ class ServerInfo {
     String filebeatShellPath
     String ip2LocationPath
     String updateDate;
+    String startUpMaintainShellPath
+    String shutDownMaintainShellPath
 }
