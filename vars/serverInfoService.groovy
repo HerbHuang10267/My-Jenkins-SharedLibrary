@@ -12,4 +12,4 @@ def updateServerInfoStatus(Map config = [:], Map serverInfoMap = [:]) {
     return serverInfoBO.updateServerInfoStatus(config, serverInfoMap)
 }
 
-//return this
+return this

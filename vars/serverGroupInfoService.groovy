@@ -1,5 +1,4 @@
 #!/usr/bin/env groovy
-import com.serverGroupInfo.dto.ServerGroupInfo
 import com.serverGroupInfo.model.ServerGroupInfoBO
 import groovy.transform.Field
 
@@ -9,4 +8,4 @@ def queryServerGroupInfoList(Map config = [:]) {
     return serverGroupInfoBO.queryServerGroupInfoList(config)
 }
 
-//return this
+return this
