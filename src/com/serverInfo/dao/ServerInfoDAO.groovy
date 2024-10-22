@@ -36,7 +36,9 @@ def queryServerInfoList(Map config = [:]) {
                 deployShellPath: fields[11],     // deploy_server shell path
                 filebeatShellPath: fields[12],   // filebeat shell path
                 ip2LocationPath: fields[13],     // ip2location path
-                updateDate: fields[14]           // 更新日期
+                updateDate: fields[14],          // 更新日期
+                startUpMaintainShellPath: fields[15], // start up maintain shell path
+                shutDownMaintainShellPath: fields[16] // shut down maintain shell path
         )
         serverInfoList.add(serverInfo)
     }
