@@ -13,5 +13,6 @@ def call(Map config = [:]) {
         aws s3 cp s3://$awsBucketName/ROOT.war ./target --profile $awsProfile
         unzip -oq ./target/ROOT.war -d ./target/ROOT
         ls -al ./target
+
     """
 }
