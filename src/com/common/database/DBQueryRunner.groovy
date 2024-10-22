@@ -18,6 +18,7 @@ def executeSQL(Map config = [:]) {
         proc.consumeProcessOutput(sout, serr)
         proc.waitForOrKill(10 * 1000)
         println("sout: ${sout}")
+        println("serr: ${serr}")
         return sout.toString()
     } catch (Exception e) {
         println("SQLite excute SQL failed: ${e.getMessage()} ")
