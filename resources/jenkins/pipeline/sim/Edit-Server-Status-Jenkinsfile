@@ -1,0 +1,23 @@
+pipeline {
+    agent any
+    stages {
+        stage("init") {
+            steps {
+                script {
+                    sh 'env'
+                    sh 'dnf install sqlite -y'
+                }
+            }
+        }
+        stage("update server info") {
+            steps {
+                script {
+                    library('My-Jenkins-SharedLibrary@dev')
+                    Map serverInfoMap = transferUtil.collectCheckBoxToMap(Servers)
+                    println serverInfoMap
+                    serverInfoService.updateServerInfoStatus(project: "9w", serverInfoMap)
+                }
+            }
+        }
+    }
+}

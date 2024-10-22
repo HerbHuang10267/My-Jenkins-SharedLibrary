@@ -1,0 +1,199 @@
+def DBData = [:]
+
+pipeline {
+    agent any
+    tools {
+        jdk 'Zulu 8.76.0.17'
+        maven 'Maven 3.6.3'
+    }
+    stages {
+        stage("init") {
+            steps {
+                script {
+
+                    sh 'env'
+                    sh 'dnf install sqlite -y'
+                    // sh "git gc"
+                    library('My-Jenkins-SharedLibrary@dev')
+
+                    List serverSelectedList = serverSelected.split(',') as List
+                    List buildStepSelectedList = buildStepSelected.split(',') as List
+
+                    List serverInfoList = serverInfoService.queryServerInfoList(project: "9w")
+                    Map serverInfoByGroupMap = transferUtil.serverInfoToGroupMap(serverInfoList)
+
+                    List shutDownServerOrderList = serverGroupInfoService.queryServerGroupInfoList(project: "9w", sort: "shutdownorder")
+                    List startUpServerOrderList = serverGroupInfoService.queryServerGroupInfoList(project: "9w", sort: "startuporder")
+
+                    DBData.put("serverSelectedList", serverSelectedList)
+                    DBData.put("buildStepSelectedList", buildStepSelectedList)
+                    DBData.put("serverInfoList", serverInfoList)
+                    DBData.put("serverInfoByGroupMap", serverInfoByGroupMap)
+                    DBData.put("shutDownServerOrderList", shutDownServerOrderList)
+                    DBData.put("startUpServerOrderList", startUpServerOrderList)
+                }
+            }
+        }
+        stage('maven build') {
+            when {
+                expression {
+                    DBData.get("buildStepSelectedList").contains("maven build")
+                }
+            }
+            steps {
+                sh "mvn -v"
+                sh "mvn clean package -Pdev -Dmaven.test.skip=true"
+            }
+        }
+        stage('shutdown servers') {
+            when {
+                expression {
+                    DBData.get("buildStepSelectedList").contains("shutdown servers")
+                }
+            }
+            steps {
+                script {
+
+                    List serverSelectedList = DBData.get("serverSelectedList")
+                    List shutDownServerOrderList = DBData.get("shutDownServerOrderList")
+                    Map serverInfoByGroupMap = DBData.get("serverInfoByGroupMap")
+
+                    for (shutDownServerGroup in shutDownServerOrderList) {
+
+                        Map tasks = [:]
+                        def serverGroup = shutDownServerGroup.serverGroup
+                        def serverInfoList = serverInfoByGroupMap[serverGroup]
+
+                        for (serverInfoData in serverInfoList) {
+                            def serverInfo = serverInfoData
+                            def hostName = serverInfo.hostName
+
+                            if (!serverSelectedList.contains(hostName)) {
+                                continue
+                            }
+
+                            tasks[serverGroup] = {
+                                shutdown_server(serverInfo)
+                            }
+                        }
+
+                        if (!tasks.isEmpty()) {
+                            parallel tasks
+                            sleep(time:1,unit:"SECONDS")
+                        }
+                    }
+                }
+            }
+        }
+        stage("copy war to servers") {
+            when {
+                expression {
+                    DBData.get("buildStepSelectedList").contains("copy war to servers")
+                }
+            }
+            steps {
+                script {
+
+                    Map tasks = [:]
+                    List serverSelectedList = DBData.get("serverSelectedList")
+                    List serverInfoList = DBData.get("serverInfoList")
+
+                    for (serverInfoData in serverInfoList) {
+
+                        def serverInfo = serverInfoData
+                        def hostName = serverInfo.hostName
+
+                        if (!serverSelectedList.contains(hostName)) {
+                            continue
+                        }
+                        println "selected hostName:" + hostName
+                        tasks[hostName] = {
+                            scp_war(serverInfo)
+                        }
+
+                    }
+
+                    if (!tasks.isEmpty()) {
+                        parallel tasks
+                    }
+                }
+            }
+        }
+        stage("deploy war to servers") {
+            when {
+                expression {
+                    DBData.get("buildStepSelectedList").contains("deploy war to servers")
+                }
+            }
+            steps {
+                script {
+
+                    Map tasks = [:]
+                    List serverSelectedList = DBData.get("serverSelectedList")
+                    List serverInfoList = DBData.get("serverInfoList")
+
+
+                    for (serverInfoData in serverInfoList) {
+
+                        def serverInfo = serverInfoData
+                        def hostName = serverInfo.hostName
+
+                        if (!serverSelectedList.contains(hostName)) {
+                            continue
+                        }
+
+                        tasks[hostName] = {
+                            deploy_war(serverInfo)
+                        }
+
+                    }
+
+                    if (!tasks.isEmpty()) {
+                        parallel tasks
+                    }
+                }
+            }
+        }
+        stage("startup servers") {
+            when {
+                expression {
+                    DBData.get("buildStepSelectedList").contains("startup servers")
+                }
+            }
+            steps {
+                script {
+
+                    List serverSelectedList = DBData.get("serverSelectedList")
+                    List startUpServerOrderList = DBData.get("startUpServerOrderList")
+                    Map serverInfoByGroupMap = DBData.get("serverInfoByGroupMap")
+
+                    for (startUpServerGroup in startUpServerOrderList) {
+
+                        Map tasks = [:]
+                        def serverGroup = startUpServerGroup.serverGroup
+                        def serverInfoList = serverInfoByGroupMap[serverGroup]
+
+                        for (serverInfoData in serverInfoList) {
+
+                            def serverInfo = serverInfoData
+                            def hostName = serverInfo.hostName
+
+                            if (!serverSelectedList.contains(hostName)) {
+                                continue
+                            }
+
+                            tasks[serverGroup] = {
+                                startup_server(serverInfo)
+                            }
+                        }
+
+                        if (!tasks.isEmpty()) {
+                            parallel tasks
+                            sleep(time:2,unit:"SECONDS")
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
