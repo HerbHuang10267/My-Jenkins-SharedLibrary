@@ -3,6 +3,6 @@ import com.serverInfo.dto.ServerInfo
 
 def call(ServerInfo serverInfo) {
     sh """
-        ssh root@$serverInfo.ip sh $serverInfo.startUpMaintainShellPath
+        ssh -p56123 root@$serverInfo.ip sh $serverInfo.startUpMaintainShellPath
     """
 }
