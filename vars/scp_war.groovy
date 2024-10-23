@@ -3,6 +3,6 @@ import com.serverInfo.dto.ServerInfo
 
 def call(ServerInfo serverInfo) {
     sh """
-        scp -p56123 ./target/ROOT.war root@$serverInfo.ip:$serverInfo.tomcatPath/ROOT.zip
+        scp -P56123 ./target/ROOT.war root@$serverInfo.ip:$serverInfo.tomcatPath/ROOT.zip
     """
 }
