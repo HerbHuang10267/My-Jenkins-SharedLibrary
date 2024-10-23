@@ -8,10 +8,10 @@ def call(Map config = [:]) {
 
     sh """
         
-        aws s3 sync ./ROOT s3://$awsBucketName/ --exclude "*" --include "*.ico" --delete --profile $awsProfile
-        aws s3 sync ./ROOT/js/ s3://$awsBucketName/js/ --delete --profile $awsProfile
-        aws s3 sync ./ROOT/images/ s3://$awsBucketName/images/ --delete --profile $awsProfile
-        aws s3 sync ./ROOT/css/ s3://$awsBucketName/css/ --delete --profile $awsProfile
+        aws s3 sync ./target/ROOT/ s3://$awsBucketName/ --exclude "*" --include "*.ico" --delete --profile $awsProfile
+        aws s3 sync ./target/ROOT/js/ s3://$awsBucketName/js/ --delete --profile $awsProfile
+        aws s3 sync ./target/ROOT/images/ s3://$awsBucketName/images/ --delete --profile $awsProfile
+        aws s3 sync ./target/ROOT/css/ s3://$awsBucketName/css/ --delete --profile $awsProfile
 
     """
 
